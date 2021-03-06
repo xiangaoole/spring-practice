@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context> <!-- 上下文组件/资源声明（类似于 Spring 的上下文） -->
+
+	<!-- 资源或组件类似于 Spring Bean -->
+	<Resource name="jdbc/UserPlatformDB"
+              type="javax.sql.DataSource"  auth="Container"
+              description="Derby database for User Platform"
+              maxActive="100" maxIdle="30" maxWait="10000"
+              username="" password="" 
+              driverClassName="org.apache.derby.jdbc.EmbeddedDriver"
+              url="jdbc:derby:/Users/gaoxiang/learn/derby/user-platform;create=true"/>
+
+	<!-- Bean Factory -->
+	<Resource name="bean/DBConnectionManager" auth="Container"
+			  type="com.haroldgao.projects.user.sql.DBConnectionManager"
+			  factory="org.apache.naming.factory.BeanFactory"/>
+
+</Context>

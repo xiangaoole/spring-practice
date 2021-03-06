@@ -1,6 +1,7 @@
 package com.haroldgao.projects.user.repository;
 
 import com.haroldgao.projects.function.ThrowableFunction;
+import com.haroldgao.projects.user.context.ComponentContext;
 import com.haroldgao.projects.user.domain.User;
 import com.haroldgao.projects.user.sql.DBConnectionManager;
 
@@ -8,17 +9,13 @@ import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static org.apache.commons.lang.ClassUtils.wrapperToPrimitive;
 
 /**
  * 数据库型 {@link UserRepository} 实现
@@ -34,8 +31,8 @@ public class DatabaseUserRepository implements UserRepository {
 
     private final DBConnectionManager dbConnectionManager;
 
-    public DatabaseUserRepository(DBConnectionManager dbConnectionManager) {
-        this.dbConnectionManager = dbConnectionManager;
+    public DatabaseUserRepository() {
+        this.dbConnectionManager = ComponentContext.getInstance().getComponent("bean/DBConnectionManager");
     }
 
     private Connection getConnection() {

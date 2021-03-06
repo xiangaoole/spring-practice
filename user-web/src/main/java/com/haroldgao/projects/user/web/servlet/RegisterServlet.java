@@ -35,32 +35,17 @@ public class RegisterServlet extends HttpServlet {
 
         System.out.println(user.toString());
 
-        // the database name
-        String dbName = "/Users/gaoxiang/learn/derby/user-platform";
-        String connectionURL = "jdbc:derby:" + dbName + ";create=true";
+        DatabaseUserRepository databaseUserRepository = new DatabaseUserRepository();
+        if (databaseUserRepository.save(user)) {
+            out.println("<html><body><h1>Hello</h1><p>" +
+                    "Welcome to Spring, " + user.getName() +
+                    ".</p></body></html>");
+        } else {
+            out.println("<html><body><p>" +
+                    "Register failed!" +
+                    "</p></body></html>");
 
-        DBConnectionManager dbConnectionManager = new DBConnectionManager();
-        DatabaseUserRepository databaseUserRepository = new DatabaseUserRepository(dbConnectionManager);
-        try (Connection connection = DriverManager.getConnection(connectionURL)) {
-            log("Connected to database " + dbName);
-            dbConnectionManager.setConnection(connection);
-
-            if (databaseUserRepository.save(user)) {
-                out.println("<html><body><h1>Hello</h1><p>" +
-                        "Welcome to Spring, " + user.getName() +
-                        ".</p></body></html>");
-            } else {
-                out.println("<html><body><p>" +
-                        "Register failed!" +
-                        "</p></body></html>");
-
-                out.flush();
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e.getMessage());
-        } finally {
-            dbConnectionManager.releaseConnection();
+            out.flush();
         }
-
     }
 }
