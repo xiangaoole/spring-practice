@@ -4,7 +4,8 @@ package com.haroldgao.projects.log;
  * ANSI color, see <a href="https://misc.flogisoft.com/bash/tip_colors_and_formatting">
  *     misc.flogisoft.com</a>
  *
- * @since 1.0
+ * @since v4
+ * @author Harold Gao
  */
 public enum Colors {
     BOLD(1), DIM(2), UNDERLINE(4),

@@ -1,5 +1,11 @@
 package com.haroldgao.projects.log;
 
+/**
+ * Logger
+ *
+ * @since v4
+ * @author Harold Gao
+ */
 public class Logger {
     private static final String INFO = "[" +
             Colors.colorize("INFO", Colors.BOLD, Colors.BLUE) + "] ";
