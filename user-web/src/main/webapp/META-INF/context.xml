@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context> <!-- 上下文组件/资源声明（类似于 Spring 的上下文） -->
+	<!-- JNDI Resources -->
+	<!-- http://tomcat.apache.org/tomcat-7.0-doc/config/context.html#Resource_Definitions -->
 
-	<!-- 资源或组件类似于 Spring Bean -->
+	<!-- JDBC Data Source -->
+	<!-- http://tomcat.apache.org/tomcat-7.0-doc/jndi-resources-howto.html#JDBC%20Data%20Sources -->
 	<Resource name="jdbc/UserPlatformDB"
               type="javax.sql.DataSource"  auth="Container"
               description="Derby database for User Platform"
@@ -10,7 +13,8 @@
               driverClassName="org.apache.derby.jdbc.EmbeddedDriver"
               url="jdbc:derby:/Users/gaoxiang/learn/derby/user-platform;create=true"/>
 
-	<!-- Bean Factory -->
+	<!-- Generic JavaBean Resources -->
+	<!-- http://tomcat.apache.org/tomcat-7.0-doc/jndi-resources-howto.html#Generic%20JavaBean%20Resources -->
 	<Resource name="bean/DBConnectionManager" auth="Container"
 			  type="com.haroldgao.projects.user.sql.DBConnectionManager"
 			  factory="org.apache.naming.factory.BeanFactory"/>

@@ -22,8 +22,6 @@ Read java.util.ServiceLoader for how ServiceLoader load Service Providers.
 
 JDBC: Java DataBase Connectivity
 
-Use javax.servlet.ServletContextListener to keep the object unique in global context.
-
 #### Use DriverManager
 
 Read java.sql.DriverManager for how JDBC DriverManager load Drivers:
@@ -36,7 +34,7 @@ Read java.sql.DriverManager for how JDBC DriverManager load Drivers:
 
 Read javax.sql.DataSource for how DataSource load DataBase drivers.
 
-JNDI: Java Naming Directory Interface, http://tomcat.apache.org/tomcat-7.0-doc/jndi-resources-howto.html
+JNDI: [Java Naming Directory Interface](http://tomcat.apache.org/tomcat-7.0-doc/jndi-resources-howto.html),
 
 Naming Directory structure is analogue to:
 
@@ -47,3 +45,11 @@ ENV -> java:comp/env
 
 =      java:comp/env/bean/DBConnectionManager
 ```
+
+Use javax.servlet.ServletContextListener and JNDI context lookup to keep the object unique in global context.
+
+### v4.1
+
+JPA: [Java Persistence API](https://www.oracle.com/technical-resources/articles/java/jpa.html). We use hibernate-entitymanager in the maven dependency. (==> "JSR 317: Java Persistence API, Version 2.0")
+
+依赖注入
