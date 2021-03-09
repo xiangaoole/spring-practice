@@ -1,26 +1,33 @@
 package com.haroldgao.projects.user.sql;
 
-import com.haroldgao.projects.function.ThrowableFunction;
 import com.haroldgao.projects.log.Logger;
 import com.haroldgao.projects.user.context.ComponentContext;
 import com.haroldgao.projects.user.domain.User;
-import com.haroldgao.projects.user.repository.DatabaseUserRepository;
 
+import javax.annotation.Resource;
+import javax.persistence.EntityManager;
 import javax.sql.DataSource;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.sql.*;
-import java.util.Enumeration;
-import java.util.logging.Level;
 
 public class DBConnectionManager {
+
+    @Resource(name = "bean/EntityManager")
+    private EntityManager entityManager;
+
+    @Resource(name = "jdbc/UserPlatformDB")
+    private DataSource dataSource;
+
+    public EntityManager getEntityManager() {
+        return this.entityManager;
+    }
+
     public Connection getConnection() {
-        ComponentContext context = ComponentContext.getInstance();
         // 依赖查找
-        DataSource dataSource = context.getComponent("jdbc/UserPlatformDB");
+//        ComponentContext context = ComponentContext.getInstance();
+//        DataSource dataSource = context.getComponent("jdbc/UserPlatformDB");
         Connection connection = null;
         try {
-            connection = dataSource.getConnection();
+            connection = this.dataSource.getConnection();
         } catch (SQLException e) {
             Logger.error(e.getMessage());
         }

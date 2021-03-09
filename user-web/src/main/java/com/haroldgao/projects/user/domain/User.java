@@ -1,18 +1,25 @@
 package com.haroldgao.projects.user.domain;
 
+import javax.persistence.*;
+import java.io.Serializable;
+
 /**
  * 用户 Domain 对象
  */
-public class User {
+@Entity
+@Table(name = "users")
+public class User implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+    @Column
     private String name;
-
+    @Column
     private String password;
-
+    @Column
     private String email;
-
+    @Column
     private String phoneNumber;
 
     public Long getId() {

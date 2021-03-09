@@ -50,6 +50,15 @@ Use javax.servlet.ServletContextListener and JNDI context lookup to keep the obj
 
 ### v4.1
 
+#### JPA
+
 JPA: [Java Persistence API](https://www.oracle.com/technical-resources/articles/java/jpa.html). We use hibernate-entitymanager in the maven dependency. (==> "JSR 317: Java Persistence API, Version 2.0")
 
-依赖注入
+We use [Hibernate ORM](https://docs.jboss.org/hibernate/orm/5.4/quickstart/html_single/#tutorial_jpa) for JPA. 
+
+#### Interpretation of Annotation
+
+Using java.lang.reflect.* API, inject Components' field (javax.annotation.Resource) and invoke Components' method (javax.annotation.PostConstruct)
+
+
+

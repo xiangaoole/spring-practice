@@ -9,7 +9,7 @@
               type="javax.sql.DataSource"  auth="Container"
               description="Derby database for User Platform"
               maxActive="100" maxIdle="30" maxWait="10000"
-              username="" password="" 
+              username="" password=""
               driverClassName="org.apache.derby.jdbc.EmbeddedDriver"
               url="jdbc:derby:/Users/gaoxiang/learn/derby/user-platform;create=true"/>
 
@@ -17,6 +17,12 @@
 	<!-- http://tomcat.apache.org/tomcat-7.0-doc/jndi-resources-howto.html#Generic%20JavaBean%20Resources -->
 	<Resource name="bean/DBConnectionManager" auth="Container"
 			  type="com.haroldgao.projects.user.sql.DBConnectionManager"
+			  factory="org.apache.naming.factory.BeanFactory"/>
+
+	<Resource name="bean/EntityManager" auth="Container"
+			  type="com.haroldgao.projects.user.orm.jpa.DelegatingEntityManager"
+			  persistenceUnitName="emf"
+			  propertiesLocation="META-INF/jpa-datasource.properties"
 			  factory="org.apache.naming.factory.BeanFactory"/>
 
 </Context>
