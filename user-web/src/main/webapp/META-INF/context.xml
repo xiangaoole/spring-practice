@@ -19,6 +19,14 @@
 			  type="com.haroldgao.projects.user.sql.DBConnectionManager"
 			  factory="org.apache.naming.factory.BeanFactory"/>
 
+	<Resource name="bean/Validator" auth="Container"
+			  type="com.haroldgao.projects.user.validator.bean.validation.DelegatingValidator"
+			  factory="org.apache.naming.factory.BeanFactory"/>
+
+	<Resource name="bean/UserService" auth="Container"
+			  type="com.haroldgao.projects.user.service.UserServiceImpl"
+			  factory="org.apache.naming.factory.BeanFactory"/>
+
 	<Resource name="bean/EntityManager" auth="Container"
 			  type="com.haroldgao.projects.user.orm.jpa.DelegatingEntityManager"
 			  persistenceUnitName="emf"

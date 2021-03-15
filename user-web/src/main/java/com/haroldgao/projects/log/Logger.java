@@ -12,7 +12,7 @@ public class Logger {
     private static final String WARNING = "[" +
             Colors.colorize("WARNING", Colors.BOLD, Colors.YELLOW) + "] ";
     private static final String ERROR = "[" +
-            Colors.colorize("ERROR", Colors.BOLD, Colors.RED) + "]";
+            Colors.colorize("ERROR", Colors.BOLD, Colors.RED) + "] ";
 
     public static void info(String msg) {
         System.out.println(INFO + msg);

@@ -1,6 +1,7 @@
 package com.haroldgao.projects.user.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 
 /**
@@ -13,13 +14,19 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     @Column
     private String name;
+
     @Column
+    @Size(min = 6, max = 32)
     private String password;
+
     @Column
     private String email;
+
     @Column
+    @Pattern(regexp = "[0-9]{11}", message = "只支持11位中国大陆手机号码")
     private String phoneNumber;
 
     public Long getId() {

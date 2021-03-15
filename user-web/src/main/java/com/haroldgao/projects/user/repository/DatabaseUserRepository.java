@@ -1,10 +1,12 @@
 package com.haroldgao.projects.user.repository;
 
 import com.haroldgao.projects.function.ThrowableFunction;
+import com.haroldgao.projects.log.Logger;
 import com.haroldgao.projects.user.context.ComponentContext;
 import com.haroldgao.projects.user.domain.User;
 import com.haroldgao.projects.user.sql.DBConnectionManager;
 
+import javax.annotation.Resource;
 import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,8 +15,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 /**
@@ -24,16 +24,11 @@ import java.util.logging.Logger;
  */
 public class DatabaseUserRepository implements UserRepository {
 
-    private static Logger logger = Logger.getLogger(DatabaseUserRepository.class.getName());
-
     private static Consumer<Throwable> COMMON_EXCEPTION_HANDLER =
-            e -> logger.log(Level.SEVERE, e.getMessage());
+            e -> Logger.error(e.getMessage());
 
-    private final DBConnectionManager dbConnectionManager;
-
-    public DatabaseUserRepository() {
-        this.dbConnectionManager = ComponentContext.getInstance().getComponent("bean/DBConnectionManager");
-    }
+    @Resource(name = "bean/DBConnectionManager")
+    private DBConnectionManager dbConnectionManager;
 
     private Connection getConnection() {
         return dbConnectionManager.getConnection();
