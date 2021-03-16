@@ -6,6 +6,8 @@
 - v2: add a simple servlet page
 - v3: add a simple mvc structure
 - v4: make JDBC using DriverManager or JNDI
+- v4.1: use JPA to manage database connect.
+- v4.2: use JMX to enable JConsole monitor your model.
 
 ## v3 : MVC
 
@@ -48,6 +50,8 @@ ENV -> java:comp/env
 
 Use javax.servlet.ServletContextListener and JNDI context lookup to keep the object unique in global context.
 
+
+
 ## v4.1 JPA
 
 ### JPA
@@ -68,11 +72,68 @@ You can also add customized Constraint(liken UserValid in this project) on JavaB
 
 
 
-## v4.2
+## v4.2 JMX
 
-JMX : Java Management Extensions
+JMX : Java Management Extensions (==> [JSR 160](https://jcp.org/en/jsr/detail?id=160))
 
-jconsole
+You can use JConsole to monitor the JVM process active in you machine. This is based on the JMX specification.
 
-Com
+> **In the code** 
+>
+> I use jolokia as the JMX proxy servlet, you can visite http://localhost:8080/jolokia/read/com.haroldgao.projects.user.management:type=Author to test the MXBean class Author.
+
+### Some notes about JMX 1.4:
+
+stantard MBean : implement your own MBean interface
+
+dynamic MBean : implement the javax.management.DynamicMBean interface
+
+
+
+For standard MBean `Abc.class`, your MBean interface `AbcMBean.class` define statically:
+
+- getter and setter methods (as attributes)
+- other methods (as operations)
+- (notifications)
+
+The naming rules of these methods is like the JavaBean component model. (You can use com.sun.jmx.mbeanserver.Introspector#checkCompliance to check the design pattern of your standard MBean class)
+
+
+
+For dynamic MBean, expose attributes and operations only at runtime, through generic getter, setter or invocation method. Dynamic MBean should implement a method that returns all attributes and operation signatures.
+
+- getMBeanInfo
+- getters/setters
+- invoke
+
+
+
+MBean Metadata Classes construct a visual representation of any MBean.
+
+- JMX agent auto provide the MBeanInfo for your standard MBean file, but use default description; while StandardMBean class enable you to add custom descriptions.
+
+To be open to the widest range of management applications, like these be a language other than Java, this requires the support for an inter-process scheme other than Java serialization.  These are open MBeans (javax.management.MXBean).
+
+basic data types:
+
+- 8 primitives' boxing class
+- one dimensional array of 8 primitives
+- String / Void / BigDecimal / BigInteger / Date
+- ObjectName
+- javax.management.openmbean.CompositeData (interface)
+- javax.management.openmbean.TabularData (interface)
+
+
+
+OpenType: SimpleType, ArrayType, CompositeType, TabularType
+
+MXBean provide the function to convert your MXBean interface to open MBean. See javax.management.MXBean for more info.
+
+
+
+
+
+
+
+
 
