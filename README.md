@@ -6,8 +6,9 @@
 - v2: add a simple servlet page
 - v3: add a simple mvc structure
 - v4: make JDBC using DriverManager or JNDI
-- v4.1: use JPA to manage database connect.
-- v4.2: use JMX to enable JConsole monitor your model.
+- v4.1: use JPA to manage database connect
+- v4.2: use JMX to enable JConsole monitor your model
+- v4.3: add MicroProfile Config to manage all config properties in one place
 
 ## v3 : MVC
 
@@ -131,7 +132,30 @@ MXBean provide the function to convert your MXBean interface to open MBean. See 
 
 
 
+## V4.3 MicroProfile Config
 
+**[eclipse/microprofile-config](https://download.eclipse.org/microprofile/microprofile-config-2.0/microprofile-config-spec-2.0.html)**
+
+> **In the code**
+>
+> DefaultConfigProviderResolver use DefaultConfigBuilder.build() to build the DefaultConfig. Provides all property in one config.
+
+### MicroProfile Config Spec 2.0 Notes
+
+ConfigSource : 
+
+- Register your implementation in "org.eclipse.microprofile.config.spi.ConfigSource" (use Service Loader)
+- or Dynamically implement the Config.getConfigSources, provide `Iterable<ConfigSource>`
+
+A MicroProfile Config implementation must provide ConfigSources for :
+
+- System properties (default ordinal=400)
+- Environment variables (default ordinal=300)
+- A `ConfigSource` for each property file `META-INF/microprofile-config.properties` found on the classpath. (default ordinal = 100)
+
+
+
+Converter : convert from the configured Strings into target types. Register your implementation in "/META-INF/services/org.eclipse.microprofile.config.spi.Converter"
 
 
 

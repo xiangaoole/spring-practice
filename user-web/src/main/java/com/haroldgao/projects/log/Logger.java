@@ -14,7 +14,7 @@ public class Logger {
     private static final String ERROR = "[" +
             Colors.colorize("ERROR", Colors.BOLD, Colors.RED) + "] ";
 
-    public static void info(String msg) {
+    public static void info(Object msg) {
         System.out.println(INFO + msg);
     }
 
@@ -24,5 +24,9 @@ public class Logger {
 
     public static void warning(String msg) {
         System.out.println(WARNING + msg);
+    }
+
+    public static void highlight(String msg) {
+        System.out.println("## " + Colors.colorize(msg, Colors.BOLD, Colors.GREEN));
     }
 }

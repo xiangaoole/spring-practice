@@ -1,0 +1,8 @@
+com.haroldgao.configuration.microprofile.config.converter.BooleanConverter
+com.haroldgao.configuration.microprofile.config.converter.ByteConverter
+com.haroldgao.configuration.microprofile.config.converter.ShortConverter
+com.haroldgao.configuration.microprofile.config.converter.IntegerConverter
+com.haroldgao.configuration.microprofile.config.converter.LongConverter
+com.haroldgao.configuration.microprofile.config.converter.FloatConverter
+com.haroldgao.configuration.microprofile.config.converter.DoubleConverter
+com.haroldgao.configuration.microprofile.config.converter.StringConverter
