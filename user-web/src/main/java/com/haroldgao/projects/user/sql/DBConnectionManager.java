@@ -1,6 +1,6 @@
 package com.haroldgao.projects.user.sql;
 
-import com.haroldgao.projects.log.Logger;
+import com.haroldgao.log.Logger;
 import com.haroldgao.projects.user.domain.User;
 
 import javax.annotation.Resource;

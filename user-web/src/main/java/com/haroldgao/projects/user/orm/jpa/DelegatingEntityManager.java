@@ -1,6 +1,6 @@
 package com.haroldgao.projects.user.orm.jpa;
 
-import com.haroldgao.projects.user.context.ComponentContext;
+import com.haroldgao.context.ComponentContext;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.*;

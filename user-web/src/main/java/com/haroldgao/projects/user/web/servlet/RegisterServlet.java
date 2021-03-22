@@ -1,7 +1,7 @@
 package com.haroldgao.projects.user.web.servlet;
 
-import com.haroldgao.projects.log.Logger;
-import com.haroldgao.projects.user.context.ComponentContext;
+import com.haroldgao.log.Logger;
+import com.haroldgao.context.ComponentContext;
 import com.haroldgao.projects.user.domain.User;
 import com.haroldgao.projects.user.service.UserService;
 

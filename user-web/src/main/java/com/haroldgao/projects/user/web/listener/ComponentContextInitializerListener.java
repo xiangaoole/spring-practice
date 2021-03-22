@@ -1,7 +1,7 @@
 package com.haroldgao.projects.user.web.listener;
 
-import com.haroldgao.projects.log.Logger;
-import com.haroldgao.projects.user.context.ComponentContext;
+import com.haroldgao.log.Logger;
+import com.haroldgao.context.ComponentContext;
 import com.haroldgao.projects.user.management.Author;
 
 import javax.management.MBeanServer;
@@ -15,12 +15,9 @@ import java.lang.management.ManagementFactory;
  * 监听全局上下文
  */
 public class ComponentContextInitializerListener implements ServletContextListener {
-    private ServletContext servletContext;
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         Logger.info("contextInitialized");
-        this.servletContext = sce.getServletContext();
-        new ComponentContext().init(this.servletContext);
         registerAuthorMXBean();
     }
 

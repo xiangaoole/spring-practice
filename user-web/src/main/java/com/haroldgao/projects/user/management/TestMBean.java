@@ -1,9 +1,8 @@
 package com.haroldgao.projects.user.management;
 
-import com.haroldgao.projects.log.Logger;
+import com.haroldgao.log.Logger;
 import com.haroldgao.projects.user.domain.User;
 import com.sun.jmx.mbeanserver.Introspector;
-import sun.rmi.runtime.Log;
 
 import javax.management.*;
 import java.lang.management.ManagementFactory;

@@ -1,5 +1,7 @@
 # Java Web Application From 0 to 100
 
+
+
 ## Versions
 
 - v1: simple Tomcat 7.0 web: only an index.jsp
@@ -9,6 +11,10 @@
 - v4.1: use JPA to manage database connect
 - v4.2: use JMX to enable JConsole monitor your model
 - v4.3: add MicroProfile Config to manage all config properties in one place
+
+[TOC]
+
+
 
 ## v3 : MVC
 
@@ -159,5 +165,22 @@ Converter : convert from the configured Strings into target types. Register your
 
 
 
+## Jenkins
 
+Jenkins : 
+
+1. download soucecode from git path
+2. build : mvn clean package
+3. post build : Deploy war/ear to Tomcat 
+
+## Terminology
+
+1. **JDBC : Java DataBase Connectivity**
+2. **JNDI :  Java Naming Directory Interface**
+3. **JPA : Java Persistence API**
+4. **JMX : Java Management Extensions**
+5. **IoC : [Inversion of Control](https://github.com/IBM/java-ioc)**, design principle
+6. **POJO : Plain Old Java Object**. POJO is a Java object that is bound to no specific framework, and that a JavaBean is a special type of POJO with a strict set of naming conventions.
+7. AOT : Ahead of Time
+8. APT : Annotation Processing Tool
 

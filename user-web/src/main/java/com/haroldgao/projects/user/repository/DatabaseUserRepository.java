@@ -1,7 +1,7 @@
 package com.haroldgao.projects.user.repository;
 
-import com.haroldgao.projects.function.ThrowableFunction;
-import com.haroldgao.projects.log.Logger;
+import com.haroldgao.function.ThrowableFunction;
+import com.haroldgao.log.Logger;
 import com.haroldgao.projects.user.domain.User;
 import com.haroldgao.projects.user.sql.DBConnectionManager;
 
