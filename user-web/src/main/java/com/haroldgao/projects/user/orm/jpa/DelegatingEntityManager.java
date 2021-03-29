@@ -1,6 +1,6 @@
 package com.haroldgao.projects.user.orm.jpa;
 
-import com.haroldgao.context.ComponentContext;
+import com.haroldgao.context.ClassicComponentContext;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.*;
@@ -55,7 +55,7 @@ public class DelegatingEntityManager implements EntityManager {
             throw new RuntimeException(e);
         }
 
-        ComponentContext componentContext = ComponentContext.getInstance();
+        ClassicComponentContext componentContext = ClassicComponentContext.getInstance();
         for (String propertyName : properties.stringPropertyNames()) {
             String propertyValue = properties.getProperty(propertyName);
             if (propertyValue.startsWith("@")) {

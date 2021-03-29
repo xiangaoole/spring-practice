@@ -1,7 +1,7 @@
 package com.haroldgao.projects.user.web.servlet;
 
 import com.haroldgao.log.Logger;
-import com.haroldgao.context.ComponentContext;
+import com.haroldgao.context.ClassicComponentContext;
 import com.haroldgao.projects.user.domain.User;
 import com.haroldgao.projects.user.service.UserService;
 
@@ -37,7 +37,7 @@ public class RegisterServlet extends HttpServlet {
         user.setEmail(email);
         user.setName(username);
 
-        UserService userService = ComponentContext.getInstance().getComponent("bean/UserService");
+        UserService userService = ClassicComponentContext.getInstance().getComponent("bean/UserService");
         ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
         Validator validator = validatorFactory.getValidator();
 

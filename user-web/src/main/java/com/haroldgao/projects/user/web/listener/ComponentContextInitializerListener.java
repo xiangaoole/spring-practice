@@ -1,12 +1,10 @@
 package com.haroldgao.projects.user.web.listener;
 
 import com.haroldgao.log.Logger;
-import com.haroldgao.context.ComponentContext;
 import com.haroldgao.projects.user.management.Author;
 
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import java.lang.management.ManagementFactory;

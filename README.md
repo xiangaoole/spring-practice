@@ -245,8 +245,9 @@ Jenkins :
 2. **JNDI :  Java Naming Directory Interface**
 3. **JPA : Java Persistence API**
 4. **JMX : Java Management Extensions**
-5. **IoC : [Inversion of Control](https://github.com/IBM/java-ioc)**, design principle
-6. **POJO : Plain Old Java Object**. POJO is a Java object that is bound to no specific framework, and that a JavaBean is a special type of POJO with a strict set of naming conventions.
-7. AOT : Ahead of Time
-8. APT : Annotation Processing Tool
+5. JMS : Java Message Service 
+6. **IoC : [Inversion of Control](https://github.com/IBM/java-ioc)**, design principle
+7. **POJO : Plain Old Java Object**. POJO is a Java object that is bound to no specific framework, and that a JavaBean is a special type of POJO with a strict set of naming conventions.
+8. AOT : Ahead of Time
+9. APT : Annotation Processing Tool
 
