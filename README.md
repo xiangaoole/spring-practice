@@ -11,6 +11,7 @@
 - v4.1: use JPA to manage database connect
 - v4.2: use JMX to enable JConsole monitor your model
 - v4.3: add MicroProfile Config to manage all config properties in one place
+- v4.4: write RESTful module framework with JAX-RS
 
 [TOC]
 
@@ -144,7 +145,7 @@ MXBean provide the function to convert your MXBean interface to open MBean. See 
 
 > **In the code**
 >
-> DefaultConfigProviderResolver use DefaultConfigBuilder.build() to build the DefaultConfig. Provides all property in one config.
+> `DefaultConfigProviderResolver` use `DefaultConfigBuilder.build()` to build the `DefaultConfig`. Provides all property in one config.
 
 ### MicroProfile Config Spec 2.0 Notes
 
@@ -164,6 +165,71 @@ A MicroProfile Config implementation must provide ConfigSources for :
 Converter : convert from the configured Strings into target types. Register your implementation in "/META-INF/services/org.eclipse.microprofile.config.spi.Converter"
 
 
+
+## v4.4 REST with JAX-RS
+
+[JAX-RS](https://javaee.github.io/tutorial/jaxrs.html) makes it easy for developers to build RESTful web services using the Java programming language.
+
+Specification is [JSR-339](https://jcp.org/aboutJava/communityprocess/final/jsr339/index.html).
+
+> **In the Code**
+>
+> In my-rest-client module:
+>
+> - `RestClientDemo` test our implementations of the Client framework.
+> - `DefaultUriBuilderTest` test our implementation of UriBuilder.
+> - `HttpURLConnectionDemo` gives the demo to use HttpURLConnection.
+
+### HTTP Request Steps
+
+1. request URI:
+   - UriBuilder
+2. request method: GET POST
+   - @HttpMethod
+3. request Headers and Parameters
+   - Header Name and  Value (multi-value)
+   - Parameter Name and Value (multi-value)
+   - structure: `Map<String,List<String>>` - MultivaluedMap
+4. request Body
+5. Uri -> Request
+6. send Request
+7. get Response
+   - Success: (200 2xx)
+     - status code
+     - response Header :  `Map<String,List<String>>`
+     - response Body : binary stream
+   - Fail:
+     - Request Invalid(404)
+     - Server Wrong (5xx)
+     - Move (3xx)
+
+### Client Implementation
+
+1. build Client
+   - ClientBuilder#newClient : **ClientBuilder** impl <= **Client** impl<= **WebTarget** impl
+   - ==META-INF/services/javax.ws.rs.client.ClientBuilder== for ClientBuilder
+   
+2. set target URI
+
+   - Client#target(URI) <= **WebTarget** impl
+   - Client#target(URI) <= Client#target(URIBuilder) <= **UriBuilder** impl
+   - UriBuilder <= **RuntimeDelegate** impl <= **UriBuilder** \ **ResponseBuilder** \ **VariantListBuilder** impl
+   - ==META-INF/services/javax.ws.rs.ext.RuntimeDelegate== for RuntimeDelegate
+
+3. send Request
+
+   - WebTarget#request() <= **Invocation.Builder** impl
+   - Invocation.Builder#get() <= GET **Invocation** impl <= **Response** impl
+
+   - headers: mediaTypes, locales, encodings, cookies, cacheControl, properties
+   - query string `?a=1&b=2`
+   - request method: Invocation <= buildGet; buildPost, buildPut <= Entity
+   - request entity (OutputStream)
+
+4. get Response
+
+   - Invocation#invoke()
+   - **Response** <= **ResponseBuilder** <= HttpURLConnection
 
 ## Jenkins
 
