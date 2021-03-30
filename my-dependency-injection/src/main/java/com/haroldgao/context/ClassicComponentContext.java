@@ -1,6 +1,5 @@
 package com.haroldgao.context;
 
-import com.haroldgao.di.DependencyInjection;
 import com.haroldgao.function.ThrowableAction;
 import com.haroldgao.function.ThrowableFunction;
 import com.haroldgao.log.Logger;
@@ -9,20 +8,18 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import javax.naming.*;
-import javax.servlet.ServletContainerInitializer;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletContextListener;
-import javax.servlet.ServletException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
  * Web 应用全局上下文
  */
-public class ClassicComponentContext implements ComponentContext, ServletContainerInitializer {
+public class ClassicComponentContext implements ComponentContext {
     public static final String CONTEXT_NAME = ClassicComponentContext.class.getName();
     private static ServletContext servletContext;
 
@@ -34,20 +31,16 @@ public class ClassicComponentContext implements ComponentContext, ServletContain
      * Cache for {@link PreDestroy}
      */
     private final Map<Method, Object> preDestroyMethodCache = new LinkedHashMap<>();
+    private volatile AtomicBoolean enteredDestroy;
 
     public static ClassicComponentContext getInstance() {
         return (ClassicComponentContext) servletContext.getAttribute(CONTEXT_NAME);
     }
 
-    private void init(ServletContext servletContext) throws RuntimeException {
+    public void init(ServletContext servletContext) throws RuntimeException {
         ClassicComponentContext.servletContext = servletContext;
         servletContext.setAttribute(CONTEXT_NAME, this);
         init();
-    }
-
-    @Override
-    public void onStartup(Set<Class<?>> c, ServletContext ctx) throws ServletException {
-        init(ctx);
     }
 
     @Override
@@ -287,6 +280,10 @@ public class ClassicComponentContext implements ComponentContext, ServletContain
      * Invoke methods annotated by {@link PreDestroy } before JVM destroy
      */
     private void processPreDestroy() {
+        // return once invoked
+        if (!enteredDestroy.compareAndSet(false, true)) {
+            return;
+        }
         Method[] methods = preDestroyMethodCache.keySet().toArray(new Method[0]);
         for (Method method : methods) {
             Object component = preDestroyMethodCache.remove(methods);

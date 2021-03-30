@@ -5,13 +5,22 @@
 ## Versions
 
 - v1: simple Tomcat 7.0 web: only an index.jsp
+
 - v2: add a simple servlet page
+
 - v3: add a simple mvc structure
+
 - v4: make JDBC using DriverManager or JNDI
+
 - v4.1: use JPA to manage database connect
+
 - v4.2: use JMX to enable JConsole monitor your model
+
 - v4.3: add MicroProfile Config to manage all config properties in one place
+
 - v4.4: write RESTful module framework with JAX-RS
+
+- v4.4.2: Java Messaging Service, implement default Subscriber\Publisher\Subscription using microprofile-reactive-messaging-api 
 
 [TOC]
 
@@ -230,6 +239,8 @@ Specification is [JSR-339](https://jcp.org/aboutJava/communityprocess/final/jsr3
 
    - Invocation#invoke()
    - **Response** <= **ResponseBuilder** <= HttpURLConnection
+
+
 
 ## Jenkins
 
